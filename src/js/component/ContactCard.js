@@ -24,6 +24,11 @@ export const ContactCard = ({ contacts }) => {
 								<i className="fas fa-pencil-alt mr-3" />
 							</button>
 						</Link>
+
+						<button className="btn" onClick={() => props.onDelete()}>
+							<i className="fas fa-trash-alt" />
+						</button>
+
 						<button
 							className="btn"
 							onClick={() => {
@@ -65,8 +70,7 @@ export const ContactCard = ({ contacts }) => {
 ContactCard.propTypes = {
 	history: PropTypes.object,
 	onDelete: PropTypes.func,
-	contacts: PropTypes.object,
-	key: PropTypes.object
+	contacts: PropTypes.object
 };
 
 /**
