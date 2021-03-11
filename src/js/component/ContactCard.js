@@ -27,17 +27,9 @@ export const ContactCard = ({ contacts }, { props }) => {
 
 						<button
 							type="button"
-							className="btn btn-primary"
+							className="btn"
 							data-toggle="modal"
 							data-target={"#exampleModal" + contacts.id}>
-							<i className="fas fa-trash-alt" />
-						</button>
-
-						<button
-							className="btn"
-							onClick={() => {
-								actions.deleteRecord(contacts.id);
-							}}>
 							<i className="fas fa-trash-alt" />
 						</button>
 
@@ -45,6 +37,7 @@ export const ContactCard = ({ contacts }, { props }) => {
 							className="modal fade text-dark"
 							id={"exampleModal" + contacts.id}
 							role="dialog"
+							data-backdrop="false"
 							aria-labelledby="exampleModalLabel"
 							aria-hidden="true">
 							<div className="modal-dialog" role="document">
