@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import MikePhoto from "../../img/m101.jpg";
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 export const ContactCard = ({ contacts }) => {
 	const [state, setState] = useState({
 		//initialize state here
 	});
+	const { store, actions } = useContext(Context);
 
 	return (
 		<li className="list-group-item">
@@ -16,10 +19,16 @@ export const ContactCard = ({ contacts }) => {
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">
-						<button className="btn">
-							<i className="fas fa-pencil-alt mr-3" />
-						</button>
-						<button className="btn" onClick={() => props.onDelete()}>
+						<Link to={"/edit/" + contacts.id}>
+							<button className="btn">
+								<i className="fas fa-pencil-alt mr-3" />
+							</button>
+						</Link>
+						<button
+							className="btn"
+							onClick={() => {
+								actions.deleteRecord(contacts.id);
+							}}>
 							<i className="fas fa-trash-alt" />
 						</button>
 					</div>
@@ -56,7 +65,8 @@ export const ContactCard = ({ contacts }) => {
 ContactCard.propTypes = {
 	history: PropTypes.object,
 	onDelete: PropTypes.func,
-	contacts: PropTypes.object
+	contacts: PropTypes.object,
+	key: PropTypes.object
 };
 
 /**
