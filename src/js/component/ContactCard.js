@@ -5,7 +5,7 @@ import MikePhoto from "../../img/m101.jpg";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
-export const ContactCard = ({ contacts }) => {
+export const ContactCard = ({ contacts }, { props }) => {
 	const [state, setState] = useState({
 		//initialize state here
 	});
@@ -25,7 +25,11 @@ export const ContactCard = ({ contacts }) => {
 							</button>
 						</Link>
 
-						<button className="btn" onClick={() => props.onDelete()}>
+						<button
+							type="button"
+							className="btn btn-primary"
+							data-toggle="modal"
+							data-target={"#exampleModal" + contacts.id}>
 							<i className="fas fa-trash-alt" />
 						</button>
 
@@ -36,6 +40,39 @@ export const ContactCard = ({ contacts }) => {
 							}}>
 							<i className="fas fa-trash-alt" />
 						</button>
+
+						<div
+							className="modal fade text-dark"
+							id={"exampleModal" + contacts.id}
+							role="dialog"
+							aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div className="modal-dialog" role="document">
+								<div className="modal-content">
+									<div className="modal-header">
+										<h5 className="modal-title  text-dark" id="exampleModalLabel">
+											Delete contact: {contacts.full_name}
+										</h5>
+									</div>
+									<div className="modal-body text-dark">
+										<p>Warning: unknown consequences after this point... Kidding!</p>
+									</div>
+									<div className="modal-footer">
+										<button type="button" className="btn btn-secondary" data-dismiss="modal">
+											Oh no!
+										</button>
+										<button
+											type="button"
+											className="btn btn-primary"
+											onClick={() => {
+												actions.deleteRecord(contacts.id);
+											}}>
+											Do it!
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<label className="name lead">{contacts.full_name}</label>
 					<br />
