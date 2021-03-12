@@ -57,6 +57,8 @@ export const ContactCard = ({ contacts }, { props }) => {
 										<button
 											type="button"
 											className="btn btn-primary"
+											data-dismiss="modal"
+											aria-label="Close"
 											onClick={() => {
 												actions.deleteRecord(contacts.id);
 											}}>
