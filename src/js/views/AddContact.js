@@ -13,14 +13,16 @@ export const AddContact = () => {
 		<div className="container">
 			<div>
 				<h1 className="text-center mt-5">Add a new contact</h1>
-				<form>
+				<form className=" g-3 needs-validation">
 					<div className="form-group">
 						<label>Full Name</label>
 						<input
 							type="text"
-							className="form-control"
+							id="name"
+							className={!name ? "form-control is-invalid" : "form-control"}
 							placeholder="Full Name"
 							onChange={e => setName(e.target.value)}
+							required
 						/>
 					</div>
 					<div className="form-group">
@@ -30,6 +32,7 @@ export const AddContact = () => {
 							className="form-control"
 							placeholder="Enter email"
 							onChange={e => setEmail(e.target.value)}
+							required
 						/>
 					</div>
 					<div className="form-group">
@@ -39,6 +42,7 @@ export const AddContact = () => {
 							className="form-control"
 							placeholder="Enter phone"
 							onChange={e => setPhone(e.target.value)}
+							required
 						/>
 					</div>
 					<div className="form-group">
@@ -48,6 +52,7 @@ export const AddContact = () => {
 							className="form-control"
 							placeholder="Enter address"
 							onChange={e => setAddress(e.target.value)}
+							required
 						/>
 					</div>
 					<Link to={"/"}>

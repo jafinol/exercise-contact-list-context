@@ -1,3 +1,4 @@
+const url = "https://assets.breatheco.de/apis/fake/contact/";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -8,7 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//(Arrow) Functions that update the Store
 			// Remember to use the scope: scope.state.store & scope.setState()
 			getAgenda: () => {
-				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/finolweb")
+				fetch(url + "agenda/finolweb")
 					.then(res => res.json())
 					.then(response => {
 						//console.log(response);
@@ -17,7 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			//Inicio de add
 			addContactAgenda(name, phone, email, address) {
-				fetch("https://assets.breatheco.de/apis/fake/contact/", {
+				fetch(url, {
 					method: "post",
 					headers: { "Content-type": "application/json" },
 					body: JSON.stringify({
@@ -27,27 +28,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 						address: address,
 						email: email
 					})
-				}).then(() => {
-					fetch("https://assets.breatheco.de/apis/fake/contact/agenda/finolweb")
-						.then(res => res.json())
-						.then(response => {
-							setStore({ agenda: response });
-						});
-				});
+				}).then(() => getActions().getAgenda());
+
+				// .then(() => {
+				// 	fetch("https://assets.breatheco.de/apis/fake/contact/agenda/finolweb")
+				// 		.then(res => res.json())
+				// 		.then(response => {
+				// 			setStore({ agenda: response });
+				// 		});
+				// });
 			}, //Final add
 			deleteRecord(id) {
-				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+				fetch(url + id, {
 					method: "DELETE"
-				}).then(() => {
-					fetch("https://assets.breatheco.de/apis/fake/contact/agenda/finolweb")
-						.then(res => res.json())
-						.then(response => {
-							setStore({ agenda: response });
-						});
-				});
+				}).then(() => getActions().getAgenda());
+				// .then(() => {
+				// 	fetch("https://assets.breatheco.de/apis/fake/contact/agenda/finolweb")
+				// 		.then(res => res.json())
+				// 		.then(response => {
+				// 			setStore({ agenda: response });
+				// 		});
+				// });
 			}, //final delete
 			updateContact(id, name, phone, email, address) {
-				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+				fetch(url + id, {
 					method: "PUT",
 					headers: { "Content-type": "application/json" },
 					body: JSON.stringify({
@@ -57,13 +61,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						email: email,
 						agenda_slug: "finolweb"
 					})
-				}).then(() => {
-					fetch("https://assets.breatheco.de/apis/fake/contact/agenda/finolweb")
-						.then(res => res.json())
-						.then(response => {
-							setStore({ agenda: response });
-						});
-				});
+				}).then(() => getActions().getAgenda());
+				// .then(() => {
+				// 	fetch("https://assets.breatheco.de/apis/fake/contact/agenda/finolweb")
+				// 		.then(res => res.json())
+				// 		.then(response => {
+				// 			setStore({ agenda: response });
+				// 		});
+				// });
 			} //end update
 		} //action final
 	};

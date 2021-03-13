@@ -7,9 +7,6 @@ import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
 
 export const Contacts = () => {
-	const [state, setState] = useState({
-		showModal: false
-	});
 	const { store, actions } = useContext(Context);
 
 	return (
@@ -36,8 +33,6 @@ export const Contacts = () => {
 						})}
 				</ul>
 			</div>
-
-			<Modal show={state.showModal} onClose={() => setState({ showModal: false })} />
 		</div>
 	);
 };
