@@ -3,11 +3,20 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const AddContact = () => {
+	let nameclass = "form-control";
 	const { actions } = useContext(Context);
 	const [phone, setPhone] = useState("");
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [address, setAddress] = useState("");
+	console.log("Hello2", name == false);
+	const fields = e => {
+		if (!name || !phone || !email || !address) {
+			e.preventDefault();
+		} else {
+			actions.addContactAgenda(name, phone, email, address);
+		}
+	};
 
 	return (
 		<div className="container">
@@ -29,7 +38,8 @@ export const AddContact = () => {
 						<label>Email</label>
 						<input
 							type="email"
-							className="form-control"
+							id="email"
+							className={!email ? "form-control is-invalid" : "form-control"}
 							placeholder="Enter email"
 							onChange={e => setEmail(e.target.value)}
 							required
@@ -39,7 +49,8 @@ export const AddContact = () => {
 						<label>Phone</label>
 						<input
 							type="phone"
-							className="form-control"
+							id="phone"
+							className={!phone ? "form-control is-invalid" : "form-control"}
 							placeholder="Enter phone"
 							onChange={e => setPhone(e.target.value)}
 							required
@@ -49,7 +60,7 @@ export const AddContact = () => {
 						<label>Address</label>
 						<input
 							type="text"
-							className="form-control"
+							className={!address ? "form-control is-invalid" : "form-control"}
 							placeholder="Enter address"
 							onChange={e => setAddress(e.target.value)}
 							required
@@ -59,8 +70,9 @@ export const AddContact = () => {
 						<button
 							type="button"
 							className="btn btn-primary form-control"
-							onClick={() => {
-								actions.addContactAgenda(name, phone, email, address);
+							onClick={e => {
+								fields(e);
+								console.log("Hello word");
 							}}>
 							save
 						</button>
