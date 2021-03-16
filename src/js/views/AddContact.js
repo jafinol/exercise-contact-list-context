@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Contacts } from "./Contacts";
 // import { useHistory } from "react-router-dom";
 
 export const AddContact = () => {
-	// const history = useHistory();
+	const { store } = useContext(Context);
+	console.log(store.agenda);
+	let history = useHistory();
 	const { actions } = useContext(Context);
 	const [phone, setPhone] = useState("");
 	const [name, setName] = useState("");
@@ -22,9 +24,7 @@ export const AddContact = () => {
 	useEffect(() => {
 		if (!valName && !valEmail && !valPhone && !valAddress && validation) {
 			actions.addContactAgenda(name, phone, email, address);
-			<Link to="/">
-				<Contacts />
-			</Link>;
+			history.push("/contacts");
 			setValidation(false);
 		} else {
 			setValidation(false);
